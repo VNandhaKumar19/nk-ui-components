@@ -1,17 +1,17 @@
-import "@nk-ui/core/src/nk-button/nk-button"; // Import the custom element definition
-import { NKButtonElement } from "@nk-ui/core/src/nk-button/nk-button"; // Import the custom element definition
-import { variantEnum } from "@nk-ui/core/src/utils/config.model";
+import "@nk-ui/core/dist/nk-button/nk-button"; // Import the custom element definition
+import { NKButtonElement } from "@nk-ui/core" // Import the custom element definition
+import { variant } from "@nk-ui/core/dist/utils/config.model";
 import * as React from "react";
 import { useEffect, useRef } from "react";
 
 interface NKButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: variantEnum; // Add all the variants you have
+  _variant?: variant; // Add all the variants you have
   size?: "xs" | "s" | "m" | "l" | "xl"; // Add all the sizes you have
   loader?: boolean;
 }
 
 const NKButton: React.FC<NKButtonProps> = ({
-  variant = variantEnum.primary,
+  _variant = variant.primary,
   size = "m",
   loader = false,
   onClick,
@@ -22,11 +22,11 @@ const NKButton: React.FC<NKButtonProps> = ({
 
   useEffect(() => {
     if (buttonRef.current) {
-      buttonRef.current.variant = variant ?? variantEnum.primary;
+      buttonRef.current.variant = _variant ?? variant.primary;
       buttonRef.current.size = size;
       buttonRef.current.loader = loader;
 
-      buttonRef.current.updateStyle(variant);
+      buttonRef.current.updateStyle(_variant);
       buttonRef.current.updateStyle(size);
       buttonRef.current.updateLoader(loader);
       props.disabled && buttonRef.current.updateDisable(props.disabled);
